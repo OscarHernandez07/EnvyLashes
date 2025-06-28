@@ -1,0 +1,135 @@
+ <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{Prices}</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- !-- BoxIcons  -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+  </head>
+  <body>
+
+     <!-- NavBar -->
+    <header>
+  <a href="#" class="logo">EnvyLashes</a>
+
+  <!-- Hamburger icon -->
+  <div class="bx" id="menu-icon">&#9776;</div>
+
+  <!-- Sidebar menu (hidden by default) -->
+  <nav id="sidebar-menu" class="sidebar-menu">
+    <ul class="navbar">
+      <li><a href="index.html" >Home</a></li>
+      <li><a href="index.html">About Me</a></li>
+      <li><a href="mywork.html">My Work</a></li>
+      <li><a href="prices.html">Prices</a></li>
+       <li><a href="b4apt.html">Policies</a></li>
+      <li><a href="hours.html">Hours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+
+<!-- Contact Us Section -->
+<section class="contact-section" id="contact">
+  <div class="contact-container">
+    <h2>Contact <span>EnvyLashes</span></h2>
+    <p class="subtitle">Have questions or want to book directly? Send us a message below.</p>
+
+    <div class="contact-wrapper">
+      <!-- Contact Form -->
+      <form action="https://formspree.io/f/movwnkea" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Full Name" required />
+        <input type="email" name="email" placeholder="Email Address" required />
+        <input type="number" name="number" placeholder="Phone Number" required />
+        <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
+        <input type="hidden" name="_redirect" value="thankyou.html" />
+        <button type="submit">Send Message</button>
+      </form>
+
+
+    </div>
+  </div>
+</section>
+
+
+<script>
+  const form = document.querySelector('.contact');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const action = form.action;
+
+    try {
+      const response = await fetch(action, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        window.location.href = 'thankyou.html'; // redirect locally
+      } else {
+        alert('Oops! There was a problem submitting your form.');
+      }
+    } catch (error) {
+      alert('Oops! There was a problem submitting your form.');
+    }
+  });
+</script>
+
+
+
+<!-- FontAwesome Icons (Insert in <head>) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Create a footer -->
+    <footer class="footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>Envy<span>Lashes</span></h2>
+      <p>Where beauty meets precision. Your confidence is our priority.</p>
+    </div>
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>Email: envylashes@gmail.com</p>
+      <p>Phone: +1 774 329-9197</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/eenvylashes/"><i class='bx bxl-instagram'></i></a>
+        <a href="#"><i class='bx bxl-facebook'></i></a>
+        <a href="#"><i class='bx bxl-tiktok'></i></a>
+      </div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+  </body>
+  </html>

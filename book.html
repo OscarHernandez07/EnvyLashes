@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Now - EnvyLashes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #ffffff);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .booking-container {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(228, 90, 132, 0.2);
+      max-width: 500px;
+      width: 100%;
+      transition: box-shadow 0.3s ease;
+      animation: fadeIn 0.7s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #e45a84;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .service-name {
+      text-align: center;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 28px;
+      font-size: 1.1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fdfdfd;
+      font-size: 0.95rem;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #e45a84;
+      outline: none;
+      box-shadow: 0 0 8px rgba(228, 90, 132, 0.2);
+    }
+
+    .input-group label {
+      position: absolute;
+      left: 12px;
+      top: 14px;
+      background: white;
+      padding: 0 4px;
+      font-size: 0.9rem;
+      color: #999;
+      transition: 0.2s;
+      pointer-events: none;
+    }
+
+    .input-group input:focus + label,
+    .input-group input:not(:placeholder-shown) + label {
+      top: -8px;
+      left: 10px;
+      font-size: 0.75rem;
+      color: #e45a84;
+    }
+
+    button {
+      padding: 14px;
+      background: linear-gradient(145deg, #e45a84, #ff90b6);
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 20px rgba(228, 90, 132, 0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(228, 90, 132, 0.4);
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
+
+    @media (max-width: 540px) {
+      .booking-container {
+        padding: 30px 20px;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+
+      <!-- NavBar -->
+<header>
+  <a href="#" class="logo">EnvyLashes</a>
+
+  <!-- Hamburger icon -->
+  <div class="bx" id="menu-icon">&#9776;</div>
+
+  <!-- Sidebar menu (hidden by default) -->
+  <nav id="sidebar-menu" class="sidebar-menu">
+    <ul class="navbar">
+      <li><a href="#home" class="home-active">Home</a></li>
+      <li><a href="#aboutme">About Me</a></li>
+      <li><a href="mywork.html">My Work</a></li>
+      <li><a href="prices.html">Prices</a></li>
+      <li><a href="b4apt.html">Policies</a></li>
+      <li><a href="hours.html">Hours</a></li>
+      <li><a href="contact.html">Contact</a></li>
+
+    </ul>
+  </nav>
+</header>
+
+  <div class="booking-container">
+    <h1>Book Your Appointment</h1>
+    <div class="service-name" id="selectedService">Loading...</div>
+
+    <form action="https://formspree.io/f/movwnkea" method="POST">
+      <input type="hidden" name="service" id="serviceInput" />
+
+      <div class="input-group">
+        <input type="text" name="name" placeholder=" " required />
+        <label>Your Name</label>
+      </div>
+
+      <div class="input-group">
+        <input type="email" name="email" placeholder=" " required />
+        <label>Your Email</label>
+      </div>
+
+       <div class="input-group">
+        <input type="numberl" name="number" placeholder=" " required />
+        <label>Your Number</label>
+      </div>
+
+      <div class="input-group">
+        <input type="date" name="date" placeholder=" " required />
+        <label>Date</label>
+      </div>
+
+      <div class="input-group">
+        <input type="time" name="time" placeholder=" " required />
+        <label>Time</label>
+      </div>
+
+      <button type="submit">Confirm Booking</button>
+    </form>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service') || 'Unknown Service';
+    document.getElementById('selectedService').textContent = `Service: ${service}`;
+    document.getElementById('serviceInput').value = service;
+  </script>
+
+<script src="main.js"></script>
+</body>
+</html>
