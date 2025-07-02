@@ -15,3 +15,4 @@ menuIcon.addEventListener('click', () => {
   navbar.classList.toggle('active');
 });
 
+

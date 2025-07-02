@@ -88,6 +88,8 @@ header {
     position: fixed;
 }
 
+
+
 /* Show hamburger and hide navbar on small screens */
 @media (max-width: 768px) {
   #menu-icon {
@@ -266,13 +268,24 @@ header {
 
 .categories-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
   max-width: 1300px;
   margin: 0 auto;
   padding: 1rem;
+  padding-bottom: 100px;
   
 }
+
+
+@media (min-width: 992px) {
+  .categories-container {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
+  }
+}
+
+
+
 
 .box {
   background: #fff;
@@ -287,7 +300,6 @@ header {
   width: 100%;
   min-width: 0;
   min-height: 270px;   /* Set a fixed height for all cards */
- 
   max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
@@ -305,7 +317,6 @@ header {
   background-color: #fff;
   border-radius: 12px;
   padding: 1rem 1.25rem;
-  margin-top: 1rem;
   width: 100%;  
   flex: 1;       /* Take full width of .box */
   box-sizing: border-box;
@@ -315,7 +326,7 @@ header {
   justify-content: space-between;
   text-align: center;
   box-sizing: border-box;
-  min-height: 210px;
+  min-height: 200px;
 }
 
 @media (max-width: 900px) {
@@ -332,17 +343,21 @@ header {
 }
 
 
-@media (max-width: 600px) {
+
+
+@media (min-width: 992px) {
   .box h2{
-    font-size: 1.5rem;
-  }
-  .box h3 {
-    font-size: 0.1rem;
+    margin-top: 2rem;
+    font-size: 2rem;
   }
 
+  .column h3 {
+  font-size: 3rem;
+}
+ 
   .box p,
   .box .price {
-    font-size: 0.95rem;
+    font-size: 2rem;
   }
   .box button {
     font-size: 0.95rem;
@@ -350,10 +365,14 @@ header {
   }
 }
 
+.box h2 {
+  margin-top: 10px;
+}
+
 .column h3 {
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: #f46fa1;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.8rem;
   font-weight: 700;
 }
 
@@ -362,14 +381,13 @@ header {
   color: #222;
   margin-bottom: 0.8rem;
   line-height: 1.3;
-  font-weight: 400;
+  font-weight: 450;
 }
 
 .column .price {
   font-size: 1.5rem;
   color: #ff4081;
   font-weight: 700;
-  margin-bottom: 1rem;
 }
 
 .column button {
@@ -377,7 +395,7 @@ header {
   background-color: #ff6fa1;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 7px 20px;
   border-radius: 8px;
   font-weight: 700;
   text-shadow: 1px 1px 1px black;
@@ -533,6 +551,7 @@ header {
   text-align: center;
 }
 
+
 .container-left p {
   color: var(--text-color);
   font-size: 1.2rem;
@@ -657,7 +676,7 @@ header {
   color: var(--text-color);
   position: relative;
   margin: 0 auto;
-  padding-bottom: 40px;
+
   text-align: center;
   position: relative;
 
@@ -726,11 +745,7 @@ header {
   .container-right{
     grid-template-columns: repeat(2, 1fr);
   }
-  .categories-container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-    padding: 0.2rem;
-  }
+
   .about-content {
     padding-left: 0;
   }
@@ -1009,15 +1024,19 @@ header {
   text-align: center;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 400px) {
   .before-appointment-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    max-width: 100%;
-    padding: 0 1rem;
+    grid-template-columns: repeat(1, 1fr);
   }
 }
+
+
+@media (min-width: 992px) {
+  .before-appointment-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 per row on desktop */
+  }
+}
+
 
 
 #apt {
@@ -1042,19 +1061,19 @@ header {
 
 .before-appointment-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
-  gap: 2rem;
+  gap: 3.5rem;
   max-width: 1200px;
   margin: 0 auto 6rem auto;
-  padding: 1rem;
   width: 100%;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
   box-sizing: border-box;
 }
 
 .before-appointment-card {
   background: #fff;
   padding: 1.2rem 0.7rem;
-  border-radius: 14px;
+  border-radius: 15px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.09);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1067,7 +1086,7 @@ header {
   max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-  justify-content: space-between;
+
 }
 
 .before-appointment-card:hover {
@@ -1076,9 +1095,9 @@ header {
 }
 
 .before-appointment-card h4 {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: #f46fa1;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
@@ -1087,6 +1106,7 @@ header {
   color: #000000;
   margin-bottom: 0.8rem;
   line-height: 1.6;
+  margin-top: 1rem;
 }
 
 
@@ -1580,5 +1600,34 @@ header {
   0% { transform: scale(1) rotate(-8deg);}
   50% { transform: scale(1.1) rotate(8deg);}
   100% { transform: scale(1) rotate(-8deg);}
+}
+
+
+
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.like-btn i {
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+}
+
+.like-btn.liked i {
+  color: #f46fa1;
+  transform: scale(1.2);
+}
+
+.like-btn.liked .like-count {
+  font-weight: bold;
+  color: #f46fa1;
 }
 
