@@ -139,26 +139,28 @@
 
 
 
-      <!-- NavBar -->
+<!-- NavBar -->
 <header>
-  <a href="#" class="logo">EnvyLashes</a>
+  <a href="#" class="logo"><h2>Envy<span>Lashes</h2></a>
 
   <!-- Hamburger icon -->
   <div class="bx" id="menu-icon">&#9776;</div>
 
   <!-- Sidebar menu (hidden by default) -->
-  <nav id="sidebar-menu" class="sidebar-menu">
-    <ul class="navbar">
-      <li><a href="#home" class="home-active">Home</a></li>
-      <li><a href="#aboutme">About Me</a></li>
-      <li><a href="mywork.html">My Work</a></li>
-      <li><a href="prices.html">Prices</a></li>
-      <li><a href="b4apt.html">Policies</a></li>
-      <li><a href="hours.html">Hours</a></li>
-      <li><a href="contact.html">Contact</a></li>
-
-    </ul>
-  </nav>
+  <nav class="navbar" id="navbar">
+  <div class="nav-dropdown">
+    <a href="index.html" class="dropdown-toggle">Home <span class="arrow">&#9662;</span></a>
+    <div class="dropdown-menu">
+      <a href="index.html#aboutme">About Me</a>
+      <a href="index.html#reviews">Reviews</a>
+    </div>
+  </div>
+  <a href="mywork.html">My Work</a>
+  <a href="prices.html">Prices</a>
+  <a href="policies.html">Policies</a>
+  <a href="hours.html">Hours</a>
+  <a href="contact.html">Contact</a>
+</nav>
 </header>
 
   <div class="booking-container">
@@ -169,27 +171,27 @@
       <input type="hidden" name="service" id="serviceInput" />
 
       <div class="input-group">
-        <input type="text" name="name" placeholder=" " required />
-        <label>Your Name</label>
+        <input type="text" name="Name" placeholder=" " required />
+        <label>Full Name</label>
       </div>
 
       <div class="input-group">
-        <input type="email" name="email" placeholder=" " required />
-        <label>Your Email</label>
+        <input type="email" name="Email" placeholder=" " required />
+        <label>Email</label>
       </div>
 
        <div class="input-group">
-        <input type="numberl" name="number" placeholder=" " required />
-        <label>Your Number</label>
+        <input type="numberl" name="Phone Number" placeholder=" " required />
+        <label>Phone Number</label>
       </div>
 
       <div class="input-group">
-        <input type="date" name="date" placeholder=" " required />
+        <input type="date" name="Date" placeholder=" " required />
         <label>Date</label>
       </div>
 
       <div class="input-group">
-        <input type="time" name="time" placeholder=" " required />
+        <input type="time" name="Time" placeholder=" " required />
         <label>Time</label>
       </div>
 
@@ -203,6 +205,26 @@
     document.getElementById('selectedService').textContent = `Service: ${service}`;
     document.getElementById('serviceInput').value = service;
   </script>
+
+  <script>
+  const menuIcon = document.getElementById('menu-icon');
+  const navbar = document.getElementById('navbar');
+  menuIcon.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+    menuIcon.classList.toggle('active');
+  });
+</script>
+
+<script>
+  // Dropdown toggle for mobile
+  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    });
+  });
+</script>
 
 <script src="main.js"></script>
 </body>

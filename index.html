@@ -25,24 +25,25 @@
 <body>
     <!-- NavBar -->
 <header>
-  <a href="#" class="logo">EnvyLashes</a>
-
+  <a href="#" class="logo"><h2>Envy<span>Lashes</h2></a>
   <!-- Hamburger icon -->
   <div class="bx" id="menu-icon">&#9776;</div>
 
   <!-- Sidebar menu (hidden by default) -->
-  <nav id="sidebar-menu" class="sidebar-menu">
-    <ul class="navbar">
-      <li><a href="#home"></i> Home</a></li>
-      <li><a href="#aboutme">About Me</a></li>
-      <li><a href="mywork.html">My Work</a></li>
-      <li><a href="prices.html">Prices</a></li>
-      <li><a href="b4apt.html">Policies</a></li>
-      <li><a href="hours.html">Hours</a></li>
-      <li><a href="contact.html">Contact</a></li>
-
-    </ul>
-  </nav>
+ <nav class="navbar" id="navbar">
+  <div class="nav-dropdown">
+    <a href="index.html" class="dropdown-toggle">Home <span class="arrow">&#9662;</span></a>
+    <div class="dropdown-menu">
+      <a href="index.html#aboutme">About Me</a>
+      <a href="index.html#reviews">Reviews</a>
+    </div>
+  </div>
+  <a href="mywork.html">My Work</a>
+  <a href="prices.html">Prices</a>
+  <a href="policies.html">Policies</a>
+  <a href="hours.html">Hours</a>
+  <a href="contact.html">Contact</a>
+</nav>
 </header>
 
 
@@ -63,12 +64,7 @@
         <div class="star star8"></div>
       </div>
       <!-- Floating Hearts -->
-      <div class="heart">
-        <svg viewBox="0 0 32 29.6" width="22" height="22" fill="#f46fa1">
-          <path d="M23.6,0c-2.7,0-5.1,1.3-6.6,3.3C15.5,1.3,13.1,0,10.4,0C4.7,0,0,4.7,0,10.4c0,6.1,7.1,11.2,17,19.2
-            c9.9-8,17-13.1,17-19.2C32,4.7,27.3,0,23.6,0z"/>
-        </svg>
-      </div>
+      <div class="heart"></div>
       <div class="heart h2"><svg viewBox="0 0 32 29.6" width="22" height="22" fill="#f46fa1"><path d="M23.6,0c-2.7,0-5.1,1.3-6.6,3.3C15.5,1.3,13.1,0,10.4,0C4.7,0,0,4.7,0,10.4c0,6.1,7.1,11.2,17,19.2 c9.9-8,17-13.1,17-19.2C32,4.7,27.3,0,23.6,0z"/></svg></div>
       <div class="heart h3"><svg viewBox="0 0 32 29.6" width="22" height="22" fill="#f46fa1"><path d="M23.6,0c-2.7,0-5.1,1.3-6.6,3.3C15.5,1.3,13.1,0,10.4,0C4.7,0,0,4.7,0,10.4c0,6.1,7.1,11.2,17,19.2 c9.9-8,17-13.1,17-19.2C32,4.7,27.3,0,23.6,0z"/></svg></div>
       <div class="heart h4"><svg viewBox="0 0 32 29.6" width="22" height="22" fill="#f46fa1"><path d="M23.6,0c-2.7,0-5.1,1.3-6.6,3.3C15.5,1.3,13.1,0,10.4,0C4.7,0,0,4.7,0,10.4c0,6.1,7.1,11.2,17,19.2 c9.9-8,17-13.1,17-19.2C32,4.7,27.3,0,23.6,0z"/></svg></div>
@@ -76,12 +72,7 @@
       <div class="heart h6"><svg viewBox="0 0 32 29.6" width="22" height="22" fill="#f46fa1"><path d="M23.6,0c-2.7,0-5.1,1.3-6.6,3.3C15.5,1.3,13.1,0,10.4,0C4.7,0,0,4.7,0,10.4c0,6.1,7.1,11.2,17,19.2 c9.9-8,17-13.1,17-19.2C32,4.7,27.3,0,23.6,0z"/></svg></div>
       <!-- Floating Butterflies -->
       <div class="butterfly">
-        <svg viewBox="0 0 32 32" width="28" height="28">
-          <path d="M16 16 Q12 8, 4 8 Q8 16, 16 16 Q24 16, 28 8 Q20 8, 16 16 Z" fill="#f46fa1"/>
-          <ellipse cx="16" cy="18" rx="2" ry="6" fill="#fffbe7"/>
-          <ellipse cx="12" cy="14" rx="2" ry="4" fill="#ffe0fa"/>
-          <ellipse cx="20" cy="14" rx="2" ry="4" fill="#ffe0fa"/>
-        </svg>
+  
       </div>
       <div class="butterfly b2">
         <svg viewBox="0 0 32 32" width="28" height="28">
@@ -473,7 +464,7 @@ We’ve helped our clients feel more confident, camera-ready, and refreshed—on
     </div>
     <div class="footer-contact">
       <h3>Contact</h3>
-      <p>Email: envylashes@gmail.com</p>
+      <p>Email: <a href="https://mail.google.com/mail/u/1/#inbox?compose=DmwnWtDmBVcKRgGHxHHTphHsjMbGqdLLSTvQhlwxSVmBpFXkFjLpnrfwfkxtnlRfmmhDjTsZjQwL" target="_blank">@eenvylashes@gmail.com </a> </p>
       <p>Phone: +1 774 329-9197</p>
       <div class="footer-socials">
         <a href="https://www.instagram.com/eenvylashes/"><i class='bx bxl-instagram'></i></a>
@@ -486,6 +477,18 @@ We’ve helped our clients feel more confident, camera-ready, and refreshed—on
 </footer>
 
     
+
+<script>
+  // Dropdown toggle for mobile
+  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    });
+  });
+</script>
+
 
     <!-- Boot Strap -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
