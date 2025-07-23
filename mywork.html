@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="work-card" data-aos="fade-up">
-      <img src="" alt="Hybrid Lash Set">
+      <img src="img/pic4.jpeg" alt="Hybrid Lash Set">
       <div class="work-info">
         <h3>Hybrid Lash Set</h3>
         <!-- <p>The perfect blend of classic and volume for a balanced look.</p> -->
@@ -98,10 +98,10 @@
     <div class="footer-links">
       <h3>Quick Links</h3>
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="prices.html">Services</a></li>
+        <li><a href="index.html#aboutme">About Me</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
       </ul>
     </div>
     <div class="footer-contact">
@@ -133,6 +133,17 @@
   menuIcon.addEventListener('click', () => {
     navbar.classList.toggle('active');
     menuIcon.classList.toggle('active');
+  });
+</script>
+
+<script>
+  // Dropdown toggle for mobile
+  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    });
   });
 </script>
 

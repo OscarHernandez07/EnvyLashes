@@ -258,7 +258,8 @@ header {
 .heading {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem 1rem;
+  padding: 0.2rem 1rem;
+  padding-top: 1.5rem;
   text-align: center;
 }
 
@@ -282,7 +283,7 @@ header {
 }
 
 
-
+/* THIS IS FOR THE PRICES SECTION */
 /* Responsive */
 @media (max-width: 768px) {
   .heading h1 {
@@ -290,7 +291,6 @@ header {
     padding-left: 0;
   }
 }
-
 
 .categories-container {
   display: grid;
@@ -303,15 +303,11 @@ header {
   
 }
 
-
 @media (min-width: 992px) {
   .categories-container {
     grid-template-columns: repeat(4, 1fr); /* 4 columns on desktop */
   }
 }
-
-
-
 
 .box {
   background: #fff;
@@ -336,8 +332,6 @@ header {
   transform: translateY(-8px);
   box-shadow: 0 12px 25px rgba(244, 111, 161, 0.3);
 }
-
-
 
 .column {
   background-color: #fff;
@@ -368,28 +362,6 @@ header {
   }
 }
 
-
-
-
-@media (min-width: 992px) {
-  .box h2{
-    margin-top: 2rem;
-    font-size: 2rem;
-  }
-
-  .column h3 {
-  font-size: 3rem;
-}
- 
-  .box p,
-  .box .price {
-    font-size: 2rem;
-  }
-  .box button {
-    font-size: 0.95rem;
-    padding: 8px 12px;
-  }
-}
 
 .box h2 {
   margin-top: 10px;
@@ -433,7 +405,65 @@ header {
 
 .column button:hover {
   background-color: #fd3a7b;
+} 
+
+@media (max-width: 991px) {
+  .categories-container {
+    grid-template-columns: 1fr 1fr; /* 2 columns for mobile */
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .box {
+    max-width: 100%;
+    width: 100%;
+    padding: 1rem;
+    min-height: 280px; /* Ensures boxes stay even */
+    box-sizing: border-box;
+  }
+
+  .column {
+    padding: 1rem;
+    min-height: 180px;
+  }
+
+  .box h2 {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+  }
+
+  .column h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .column p {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .column .price {
+    font-size: 1.2rem;
+  }
+
+  .column button {
+    padding: 6px 16px;
+    font-size: 0.9rem;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .about-me {
   padding: 3.5rem 10rem;
@@ -1039,31 +1069,42 @@ header {
   }
 }
 
-
-
 /* Before Appointment Section */
 .before-appointment {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 3rem ;
+  padding: 3rem;
   padding-top: 4rem;
   text-align: center;
 }
 
-@media (min-width: 400px) {
-  .before-appointment-grid {
-    grid-template-columns: repeat(1, 1fr);
-  }
+.before-appointment-grid {
+  display: grid;
+  gap: 3.5rem;
+  max-width: 1200px;
+  margin: 0 auto 6rem auto;
+  width: 100%;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  box-sizing: border-box;
+
+  /* Default: 1 column on mobile */
+  grid-template-columns: 1fr;
 }
 
+@media (min-width: 600px) {
+  /* Medium screens: 2 columns */
+  .before-appointment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
 @media (min-width: 992px) {
+  /* Large screens: 3 columns */
   .before-appointment-grid {
-    grid-template-columns: repeat(3, 1fr); /* 3 per row on desktop */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
-
-
 
 #apt {
   font-size: 2.5rem;
@@ -1084,18 +1125,6 @@ header {
   border-radius: 2px;
 }
 
-
-.before-appointment-grid {
-  display: grid;
-  gap: 3.5rem;
-  max-width: 1200px;
-  margin: 0 auto 6rem auto;
-  width: 100%;
-  padding-top: 0.4rem;
-  padding-bottom: 0.4rem;
-  box-sizing: border-box;
-}
-
 .before-appointment-card {
   background: #fff;
   padding: 1.2rem 0.7rem;
@@ -1112,7 +1141,6 @@ header {
   max-width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
-
 }
 
 .before-appointment-card:hover {
@@ -1135,9 +1163,6 @@ header {
   margin-top: 1rem;
 }
 
-
-
-
 /* Responsive Adjustments */
 @media (max-width: 480px) {
   #apt {
@@ -1147,11 +1172,13 @@ header {
   .before-appointment-card {
     padding: 1.5rem;
   }
-
-
 }
 
 
+
+
+
+/* ======================== */
 /* Section Wrapper */
 #hours {
   background-color: #fff;
@@ -1167,7 +1194,7 @@ header {
   font-weight: 700;
   color: var(--text-color);
   position: relative;
-  margin-bottom: 3rem;
+
   margin-top: 95px;
 }
 
@@ -1259,7 +1286,6 @@ header {
     font-size: 0.95rem;
   }
 }
-
 
 
 /* CONTACT FORM */

@@ -46,37 +46,32 @@
 <!-- Before your appointmet -->
  <!--Before your appointment infortmation  -->
 
+
 <section class="before-appointment" id="before-appointment">
   <div class="heading">
     <h1>Policies</h1>
   </div>
   <div class="before-appointment-grid">
-    <!-- Policy 1 -->
     <div class="before-appointment-card">
       <h4>Remove All Your Makeup</h4>
       <p>Please ensure all makeup is removed prior to your appointment.</p>
     </div>
-    <!-- Policy 2 -->
     <div class="before-appointment-card">
       <h4>Dress Comfortable</h4>
       <p>Please wear comfortable attire to ensure a smooth and relaxing appointment.</p>
     </div>
-    <!-- Policy 3 -->
     <div class="before-appointment-card">
       <h4>No Caffeine/Alcohol Drinks</h4>
       <p>Please refrain from consuming caffeine before your appointment, as it may affect your comfort and results.</p>
     </div>
-    <!-- Policy 4 -->
     <div class="before-appointment-card">
       <h4>Tie Your Hair</h4>
       <p>Please arrive with your hair tied back in a ponytail to ensure easy access to your face during the service.</p>
     </div>
-    <!-- Policy 5 -->
     <div class="before-appointment-card">
       <h4>Remove Contact Lense</h4>
       <p>Please remove contact lenses before your appointment to avoid discomfort and ensure safety during the service.</p>
     </div>
-     <!-- Policy 6 -->
     <div class="before-appointment-card">
       <h4>Bring Inspiration Photos</h4>
       <p>You’re welcome to bring reference photos to help us better understand your desired look.</p>
@@ -95,11 +90,11 @@
     </div>
     <div class="footer-links">
       <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#reviews">Reviews</a></li>
+       <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="prices.html">Services</a></li>
+        <li><a href="index.html#aboutme">About Me</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
       </ul>
     </div>
     <div class="footer-contact">
@@ -115,6 +110,18 @@
   </div>
 </footer>
 
+
+
+<script>
+   // Dropdown toggle for mobile
+  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    });
+  });
+</script>
     
 
     <!-- Boot Strap -->

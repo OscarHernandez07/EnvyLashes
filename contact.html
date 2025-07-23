@@ -100,6 +100,17 @@
   });
 </script>
 
+<script>
+  // Dropdown toggle for mobile
+  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.parentElement;
+      parent.classList.toggle('open');
+    });
+  });
+</script>
+
 
 <!-- FontAwesome Icons (Insert in <head>) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -125,11 +136,11 @@
     </div>
     <div class="footer-links">
       <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#reviews">Reviews</a></li>
+       <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="prices.html">Services</a></li>
+        <li><a href="index.html#aboutme">About Me</a></li>
+        <li><a href="index.html#reviews">Reviews</a></li>
       </ul>
     </div>
     <div class="footer-contact">
