@@ -66,7 +66,8 @@
       position: relative;
     }
 
-    .input-group input {
+    .input-group input,
+    .input-group select {
       width: 100%;
       padding: 14px 12px;
       border: 1px solid #ddd;
@@ -76,7 +77,8 @@
       transition: border-color 0.3s, box-shadow 0.3s;
     }
 
-    .input-group input:focus {
+    .input-group input:focus,
+    .input-group select:focus {
       border-color: #e45a84;
       outline: none;
       box-shadow: 0 0 8px rgba(228, 90, 132, 0.2);
@@ -95,7 +97,8 @@
     }
 
     .input-group input:focus + label,
-    .input-group input:not(:placeholder-shown) + label {
+    .input-group input:not(:placeholder-shown) + label,
+    .input-group select:valid + label {
       top: -8px;
       left: 10px;
       font-size: 0.75rem;
@@ -136,25 +139,22 @@
   </style>
 </head>
 <body>
-
-
-
-<!-- NavBar -->
+    <!-- NavBar -->
 <header>
   <a href="#" class="logo"><h2>Envy<span>Lashes</h2></a>
-
   <!-- Hamburger icon -->
   <div class="bx" id="menu-icon">&#9776;</div>
 
   <!-- Sidebar menu (hidden by default) -->
-  <nav class="navbar" id="navbar">
+<nav class="navbar" id="navbar">
   <div class="nav-dropdown">
-    <a href="index.html" class="dropdown-toggle">Home <span class="arrow">&#9662;</span></a>
+    <a href="index.html" class="home-link">Home</a>
+    <span class="arrow dropdown-toggle">&#9662;</span>
     <div class="dropdown-menu">
       <a href="index.html#aboutme">About Me</a>
       <a href="index.html#reviews">Reviews</a>
-    </div>
   </div>
+</div>
   <a href="mywork.html">My Work</a>
   <a href="prices.html">Prices</a>
   <a href="policies.html">Policies</a>
@@ -163,11 +163,12 @@
 </nav>
 </header>
 
+
   <div class="booking-container">
     <h1>Book Your Appointment</h1>
     <div class="service-name" id="selectedService">Loading...</div>
 
-    <form action="https://formspree.io/f/movwnkea" method="POST">
+    <form id="bookingForm" action="https://formspree.io/f/movwnkea" method="POST">
       <input type="hidden" name="service" id="serviceInput" />
 
       <div class="input-group">
@@ -180,19 +181,21 @@
         <label>Email</label>
       </div>
 
-       <div class="input-group">
-        <input type="numberl" name="Phone Number" placeholder=" " required />
+      <div class="input-group">
+        <input type="tel" name="Phone Number" placeholder=" " required />
         <label>Phone Number</label>
       </div>
 
       <div class="input-group">
-        <input type="date" name="Date" placeholder=" " required />
+        <input type="date" name="Date" id="dateInput" required />
         <label>Date</label>
       </div>
 
       <div class="input-group">
-        <input type="time" name="Time" placeholder=" " required />
-        <label>Time</label>
+        <select name="Time" id="timeSelect" required>
+          <option value="" disabled selected>Select Time</option>
+        </select>
+        <label style="top:-8px; left:10px; font-size: 0.75rem; color:#e45a84;">Time</label>
       </div>
 
       <button type="submit">Confirm Booking</button>
@@ -200,34 +203,81 @@
   </div>
 
   <script>
+    const allowedTimes = {
+      weekday: ["09:00", "12:00", "15:00", "18:00"],
+      weekdaySchool: ["15:00", "18:00"],
+      weekend: ["16:30", "19:00"]
+    };
+
+    const bookedSlots = {
+      // Example: "2025-07-25": ["15:00"]
+    };
+
+    const dateInput = document.getElementById('dateInput');
+    const timeSelect = document.getElementById('timeSelect');
+
+    // Optional: block past days
+    const today = new Date().toISOString().split("T")[0];
+    dateInput.setAttribute("min", today);
+
+    dateInput.addEventListener('input', () => {
+      const selectedDate = new Date(dateInput.value);
+      const day = selectedDate.getDay(); // 0 = Sunday
+      const isWeekend = (day === 0 || day === 6);
+      const isSchoolDay = true; // You can add logic to check based on school calendar
+
+      let times = isWeekend
+        ? allowedTimes.weekend
+        : (isSchoolDay ? allowedTimes.weekdaySchool : allowedTimes.weekday);
+
+      const alreadyBooked = bookedSlots[dateInput.value] || [];
+
+      timeSelect.innerHTML = '<option value="" disabled selected>Select Time</option>';
+
+      times.forEach(time => {
+        if (!alreadyBooked.includes(time)) {
+          const option = document.createElement('option');
+          option.value = time;
+          option.textContent = formatTimeDisplay(time);
+          timeSelect.appendChild(option);
+        }
+      });
+    });
+
+    document.getElementById('bookingForm').addEventListener('submit', function (e) {
+      const date = dateInput.value;
+      const time = timeSelect.value;
+
+      if (!time) {
+        alert("Please select a time.");
+        e.preventDefault();
+        return;
+      }
+
+      if (!bookedSlots[date]) bookedSlots[date] = [];
+
+      if (bookedSlots[date].includes(time)) {
+        alert("This time is already booked.");
+        e.preventDefault();
+        return;
+      }
+
+      bookedSlots[date].push(time); // Simulate saving the booking
+      alert("Booking confirmed!");
+    });
+
+    function formatTimeDisplay(time) {
+      const [h, m] = time.split(':').map(Number);
+      const suffix = h >= 12 ? 'PM' : 'AM';
+      const hour = h % 12 === 0 ? 12 : h % 12;
+      return `${hour}:${m.toString().padStart(2, '0')} ${suffix}`;
+    }
+
+    // Load service from URL
     const params = new URLSearchParams(window.location.search);
     const service = params.get('service') || 'Unknown Service';
     document.getElementById('selectedService').textContent = `Service: ${service}`;
     document.getElementById('serviceInput').value = service;
   </script>
-
-  <script>
-  const menuIcon = document.getElementById('menu-icon');
-  const navbar = document.getElementById('navbar');
-  menuIcon.addEventListener('click', () => {
-    navbar.classList.toggle('active');
-    menuIcon.classList.toggle('active');
-  });
-</script>
-
-<script>
-  // Dropdown toggle for mobile
-  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
-    toggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      const parent = this.parentElement;
-      parent.classList.toggle('open');
-    });
-  });
-</script>
-
-
-
-<script src="main.js"></script>
 </body>
 </html>
