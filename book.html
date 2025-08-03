@@ -242,149 +242,162 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
-  <script>
-    // Initialize EmailJS
-    emailjs.init('QQVbC9xiRo775QVY2'); // Replace with your EmailJS public key
+<script>
+  // Initialize EmailJS
+  emailjs.init('QQVbC9xiRo775QVY2'); // Replace with your EmailJS public key
 
-    const allowedTimes = {
-      weekday: ['09:00', '12:00', '15:00', '18:00'],
-      weekdaySchool: ['15:00', '18:00'],
-      weekend: ['16:30', '19:00'],
+  const allowedTimes = {
+    weekday: ['09:00', '12:00', '15:00', '18:00'], // Mon–Fri
+    saturday: ['16:30', '19:00'],                 // Saturday
+  };
+
+  const dateInput = document.getElementById('dateInput');
+  const timeSelect = document.getElementById('timeSelect');
+  const bookingForm = document.getElementById('bookingForm');
+  const bookingStatus = document.getElementById('bookingStatus');
+
+  // Block past dates and Sundays
+  const today = new Date().toISOString().split('T')[0];
+  dateInput.setAttribute('min', today);
+
+  // Disable Sundays in calendar
+  dateInput.addEventListener('input', () => {
+    const selectedDate = new Date(dateInput.value);
+    if (selectedDate.getDay() === 0) {
+      alert("We're closed on Sundays. Please select another date.");
+      dateInput.value = '';
+      timeSelect.innerHTML =
+        '<option value="" disabled selected>Select Time</option>';
+    }
+  });
+
+  // Load service from URL params
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get('service') || 'Unknown Service';
+  document.getElementById('selectedService').textContent = `Service: ${service}`;
+  document.getElementById('serviceInput').value = service;
+
+  function getBookings() {
+    return JSON.parse(localStorage.getItem('envyBookings') || '[]');
+  }
+
+  function saveBookings(bookings) {
+    localStorage.setItem('envyBookings', JSON.stringify(bookings));
+  }
+
+  function isBooked(date, time) {
+    const bookings = getBookings();
+    return bookings.some((b) => b.date === date && b.time === time);
+  }
+
+  dateInput.addEventListener('change', () => {
+    const selectedDate = dateInput.value;
+    if (!selectedDate) {
+      timeSelect.innerHTML =
+        '<option value="" disabled selected>Select Time</option>';
+      return;
+    }
+
+    const day = new Date(selectedDate).getDay(); // 0 = Sunday, 6 = Saturday
+
+    let times = [];
+
+    if (day === 0) {
+      // Saturday
+      times = allowedTimes.saturday;
+    } else if ([1, 2, 3, 4, 5].includes(day)) {
+      // Monday–Friday
+      times = allowedTimes.weekday;
+    } else {
+      // Sunday should not be reachable because of earlier alert, but handle fallback
+      timeSelect.innerHTML =
+        '<option value="" disabled selected>Closed on Sundays</option>';
+      return;
+    }
+
+    timeSelect.innerHTML =
+      '<option value="" disabled selected>Select Time</option>';
+
+    times.forEach((time) => {
+      if (!isBooked(selectedDate, time)) {
+        const option = document.createElement('option');
+        option.value = time;
+        option.textContent = formatTimeDisplay(time);
+        timeSelect.appendChild(option);
+      }
+    });
+  });
+
+  function formatTimeDisplay(time) {
+    const [h, m] = time.split(':').map(Number);
+    const suffix = h >= 12 ? 'PM' : 'AM';
+    const hour = h % 12 === 0 ? 12 : h % 12;
+    return `${hour}:${m.toString().padStart(2, '0')} ${suffix}`;
+  }
+
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    bookingStatus.textContent = '';
+    bookingStatus.style.color = '';
+
+    const booking = {
+      service: document.getElementById('serviceInput').value,
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      date: dateInput.value,
+      time: timeSelect.value,
     };
 
-    const dateInput = document.getElementById('dateInput');
-    const timeSelect = document.getElementById('timeSelect');
-    const bookingForm = document.getElementById('bookingForm');
-    const bookingStatus = document.getElementById('bookingStatus');
-
-    // Block past dates
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.setAttribute('min', today);
-
-    // Load service from URL params
-    const params = new URLSearchParams(window.location.search);
-    const service = params.get('service') || 'Unknown Service';
-    document.getElementById('selectedService').textContent = `Service: ${service}`;
-    document.getElementById('serviceInput').value = service;
-
-    function getBookings() {
-      return JSON.parse(localStorage.getItem('envyBookings') || '[]');
+    if (!booking.time) {
+      alert('Please select a time.');
+      return;
     }
 
-    function saveBookings(bookings) {
-      localStorage.setItem('envyBookings', JSON.stringify(bookings));
+    if (isBooked(booking.date, booking.time)) {
+      alert('This time slot is already booked. Please choose another time.');
+      return;
     }
 
-    function isBooked(date, time) {
-      const bookings = getBookings();
-      return bookings.some((b) => b.date === date && b.time === time);
+    const bookings = getBookings();
+    bookings.push(booking);
+    saveBookings(bookings);
+
+    try {
+      await emailjs.send('service_63rbqv31asd', 'template_gffz4d9', booking);
+    } catch (err) {
+      console.error('EmailJS error:', err);
     }
 
-    dateInput.addEventListener('change', () => {
-      const selectedDate = dateInput.value;
-      if (!selectedDate) {
-        timeSelect.innerHTML =
-          '<option value="" disabled selected>Select Time</option>';
-        return;
-      }
-
-      const day = new Date(selectedDate).getDay();
-      const isWeekend = day === 0 || day === 6;
-      const isSchoolDay = [1, 2, 3, 4, 5].includes(day);
-
-      let times = isWeekend
-        ? allowedTimes.weekend
-        : isSchoolDay
-        ? allowedTimes.weekdaySchool
-        : allowedTimes.weekday;
-
-      timeSelect.innerHTML =
-        '<option value="" disabled selected>Select Time</option>';
-
-      times.forEach((time) => {
-        if (!isBooked(selectedDate, time)) {
-          const option = document.createElement('option');
-          option.value = time;
-          option.textContent = formatTimeDisplay(time);
-          timeSelect.appendChild(option);
-        }
+    try {
+      await fetch('/.netlify/functions/sendSMS', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(booking),
       });
-    });
-
-    function formatTimeDisplay(time) {
-      const [h, m] = time.split(':').map(Number);
-      const suffix = h >= 12 ? 'PM' : 'AM';
-      const hour = h % 12 === 0 ? 12 : h % 12;
-      return `${hour}:${m.toString().padStart(2, '0')} ${suffix}`;
+    } catch (err) {
+      console.error('SMS sending error:', err);
     }
 
-    bookingForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      bookingStatus.textContent = '';
-      bookingStatus.style.color = '';
+    bookingStatus.textContent =
+      'Booking confirmed! You will receive a confirmation shortly.';
+    bookingStatus.style.color = 'green';
 
-      const booking = {
-        service: document.getElementById('serviceInput').value,
-        name: document.getElementById('name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
-        date: dateInput.value,
-        time: timeSelect.value,
-      };
+    bookingForm.reset();
+    timeSelect.innerHTML =
+      '<option value="" disabled selected>Select Time</option>';
+  });
 
-      if (!booking.time) {
-        alert('Please select a time.');
-        return;
-      }
-
-      if (isBooked(booking.date, booking.time)) {
-        alert('This time slot is already booked. Please choose another time.');
-        return;
-      }
-
-      const bookings = getBookings();
-      bookings.push(booking);
-      saveBookings(bookings);
-
-      // Send EmailJS email notification to owner
-      try {
-        // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-        await emailjs.send('service_63rbqv31asd', 'template_gffz4d9', booking);
-      } catch (err) {
-        console.error('EmailJS error:', err);
-      }
-
-      // Send SMS notification via Netlify function
-      try {
-        await fetch('/.netlify/functions/sendSMS', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(booking),
-        });
-      } catch (err) {
-        console.error('SMS sending error:', err);
-      }
-
-      bookingStatus.textContent =
-        'Booking confirmed! You will receive a confirmation shortly.';
-      bookingStatus.style.color = 'green';
-
-      bookingForm.reset();
-      timeSelect.innerHTML =
-        '<option value="" disabled selected>Select Time</option>';
-    });
-
-    // Mobile menu toggle
-    document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
-    toggle.addEventListener('click', function(e) {
+  // Mobile menu toggle
+  document.querySelectorAll('.dropdown-toggle').forEach(function (toggle) {
+    toggle.addEventListener('click', function (e) {
       e.preventDefault();
       const parent = this.closest('.nav-dropdown');
       parent.classList.toggle('open');
     });
   });
+</script>
 
-
-  </script>
 
   <!-- Bootstrap Bundle JS -->
   <script
