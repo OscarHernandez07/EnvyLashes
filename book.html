@@ -25,7 +25,8 @@
     rel="stylesheet"
     integrity="sha384-3LBO4V2+KXsNxNGCjBSM6qgQxfuj+08X4uQIPXe5lASgu0SYkJ8z9tWrKuG1fqtp"
     crossorigin="anonymous"
-  />
+/>
+
 
   <style>
     * {
@@ -44,34 +45,6 @@
       padding: 40px 20px;
     }
 
-    /* Default hidden navbar for mobile */
-    .navbar {
-      display: none;
-      flex-direction: column;
-      background: white;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      right: 0;
-      padding: 20px;
-      z-index: 999;
-    }
-
-    /* When active */
-    .navbar.active {
-      display: flex;
-    }
-
-    /* For desktop screens */
-    @media (min-width: 769px) {
-      .navbar {
-        display: flex !important;
-        flex-direction: row;
-        position: static;
-        background: none;
-        padding: 0;
-      }
-    }
 
     .booking-container {
       background: rgba(255, 255, 255, 0.8);
@@ -193,61 +166,32 @@
       }
     }
 
-    @media (max-width: 768px) {
-      .navbar {
-        display: none;
-        flex-direction: column;
-        background: white;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        right: 0;
-        padding: 20px;
-  
-        z-index: 999;
-      }
-      .navbar.active {
-        display: flex;
-      }
-      .nav-dropdown {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-        position: static;
-      }
-      .dropdown-menu {
-        position: static;
-        width: 100%;
-        display: none;
-        box-shadow: none;
-        padding: 0.5rem 0;
-      }
-      .nav-dropdown.open .dropdown-menu {
-        display: flex;
-        flex-direction: column;
-      }
-    }
+    
   </style>
+
+
 </head>
 <body>
-  <!-- NavBar -->
-  <header>
-    <a href="#" class="logo"><h2>Envy<span>Lashes</span></h2></a>
-    <!-- Hamburger icon -->
-    <div class="bx" id="menu-icon">&#9776;</div>
+    <!-- NavBar -->
+<header>
+  <a href="#" class="logo"><h2>Envy<span>Lashes</h2></a>
+  <!-- Hamburger icon -->
+  <div class="bx" id="menu-icon">&#9776;</div>
 
-    <nav class="navbar" id="navbar">
-      <div class="nav-dropdown">
-        <a href="index.html" class="home-link">Home</a>
-      </div>
-      <a href="index.html#reviews">Reviews</a>
-      <a href="mywork.html">My Work</a>
-      <a href="prices.html">Prices</a>
-      <a href="policies.html">Policies</a>
-      <a href="hours.html">Hours</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+  <!-- Sidebar menu (hidden by default) -->
+<nav class="navbar" id="navbar">
+  <div class="nav-dropdown">
+    <a href="index.html" class="home-link">Home</a>
+</div>
+<a href="index.html#reviews">Reviews</a>
+  <a href="mywork.html">My Work</a>
+  <a href="prices.html">Prices</a>
+  <a href="policies.html">Policies</a>
+  <a href="hours.html">Hours</a>
+  <a href="contact.html">Contact</a>
+</nav>
+</header>
+
 
   <div class="booking-container">
     <h1>Book Your Appointment</h1>
@@ -300,7 +244,7 @@
 
   <script>
     // Initialize EmailJS
-    emailjs.init('WEPXesKeVQs4Dn5ac'); // Replace with your EmailJS public key
+    emailjs.init('QQVbC9xiRo775QVY2'); // Replace with your EmailJS public key
 
     const allowedTimes = {
       weekday: ['09:00', '12:00', '15:00', '18:00'],
@@ -405,7 +349,7 @@
       // Send EmailJS email notification to owner
       try {
         // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual IDs
-        await emailjs.send('service_5h1n2ujsd2', 'template_sngh1fl', booking);
+        await emailjs.send('service_63rbqv31asd', 'template_gffz4d9', booking);
       } catch (err) {
         console.error('EmailJS error:', err);
       }
@@ -431,12 +375,15 @@
     });
 
     // Mobile menu toggle
-    const menuIcon = document.getElementById('menu-icon');
-    const navbar = document.getElementById('navbar');
-
-    menuIcon.addEventListener('click', () => {
-      navbar.classList.toggle('active');
+    document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
+    toggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parent = this.closest('.nav-dropdown');
+      parent.classList.toggle('open');
     });
+  });
+
+
   </script>
 
   <!-- Bootstrap Bundle JS -->
@@ -448,5 +395,10 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- Your main JS -->
   <script src="main.js"></script>
+  <script>
+ 
+  </script>
+  
 </body>
+
 </html>

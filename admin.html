@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin - Booking Overview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1 {
+      color: #e45a84;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+    }
+    th {
+      background-color: #e45a84;
+      color: white;
+    }
+    tr:hover {
+      background-color: #ffe6f0;
+    }
+    .no-bookings {
+      text-align: center;
+      color: #888;
+      margin-top: 50px;
+      font-size: 1.1rem;
+    }
+    #passwordSection {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #passwordInput {
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      width: 250px;
+    }
+    #loginBtn {
+      padding: 10px 15px;
+      font-size: 1rem;
+      background: #e45a84;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-left: 8px;
+    }
+    #loginBtn:hover {
+      background: #d04874;
+    }
+  </style>
+</head>
+<body>
+  <h1>Booking Overview - Admin</h1>
+  
+  <div id="passwordSection">
+    <input type="password" id="passwordInput" placeholder="Enter password to view bookings" />
+    <button id="loginBtn">Login</button>
+  </div>
+
+  <div id="bookingsContainer" style="display:none;">
+    <table id="bookingsTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Service</th>
+          <th>Date</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="bookingsBody">
+        <!-- Booking rows will appear here -->
+      </tbody>
+    </table>
+  </div>
+
+  <div id="noBookingsMsg" class="no-bookings" style="display:none;">
+    No bookings found.
+  </div>
+
+  <script>
+    const correctPassword = 'envylashes123'; // Change this to your desired password
+    
+    const passwordSection = document.getElementById('passwordSection');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginBtn = document.getElementById('loginBtn');
+    const bookingsContainer = document.getElementById('bookingsContainer');
+    const bookingsBody = document.getElementById('bookingsBody');
+    const noBookingsMsg = document.getElementById('noBookingsMsg');
+
+    loginBtn.addEventListener('click', () => {
+      if (passwordInput.value === correctPassword) {
+        passwordSection.style.display = 'none';
+        bookingsContainer.style.display = 'block';
+        loadBookings();
+      } else {
+        alert('Incorrect password. Please try again.');
+        passwordInput.value = '';
+      }
+    });
+
+    function loadBookings() {
+      const bookings = JSON.parse(localStorage.getItem('envyBookings') || '[]');
+      if (bookings.length === 0) {
+        noBookingsMsg.style.display = 'block';
+        bookingsContainer.style.display = 'none';
+        return;
+      }
+      noBookingsMsg.style.display = 'none';
+      bookingsBody.innerHTML = '';
+      bookings.forEach(b => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${sanitize(b.name)}</td>
+          <td>${sanitize(b.email)}</td>
+          <td>${sanitize(b.phone)}</td>
+          <td>${sanitize(b.service)}</td>
+          <td>${sanitize(b.date)}</td>
+          <td>${sanitize(formatTimeDisplay(b.time))}</td>
+        `;
+        bookingsBody.appendChild(tr);
+      });
+    }
+
+    // Sanitize text to prevent XSS
+    function sanitize(str) {
+      return String(str).replace(/&/g, "&amp;")
+                        .replace(/</g, "&lt;")
+                        .replace(/>/g, "&gt;")
+                        .replace(/"/g, "&quot;")
+                        .replace(/'/g, "&#39;");
+    }
+
+    // Format time like "15:00" => "3:00 PM"
+    function formatTimeDisplay(time) {
+      if (!time) return '';
+      const [h, m] = time.split(':').map(Number);
+      const suffix = h >= 12 ? 'PM' : 'AM';
+      const hour = h % 12 === 0 ? 12 : h % 12;
+      return `${hour}:${m.toString().padStart(2, '0')} ${suffix}`;
+    }
+  </script>
+</body>
+</html>
