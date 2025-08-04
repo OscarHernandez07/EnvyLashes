@@ -244,10 +244,10 @@
 
 <script>
   // Initialize EmailJS
-  emailjs.init('QQVbC9xiRo775QVY2'); // Replace with your EmailJS public key
+  emailjs.init('QQVbC9xiRo775QVY2'); // Replace with your actual EmailJS public key
 
   const allowedTimes = {
-    weekday: ['09:00', '12:00', '15:00', '18:00'], // Mon–Fri
+    weekday: ['09:00', '12:00', '15:00', '18:00'], // Monday–Friday
     saturday: ['16:30', '19:00'],                 // Saturday
   };
 
@@ -256,20 +256,9 @@
   const bookingForm = document.getElementById('bookingForm');
   const bookingStatus = document.getElementById('bookingStatus');
 
-  // Block past dates and Sundays
+  // Set min date to today
   const today = new Date().toISOString().split('T')[0];
   dateInput.setAttribute('min', today);
-
-  // Disable Sundays in calendar
-  dateInput.addEventListener('input', () => {
-    const selectedDate = new Date(dateInput.value);
-    if (selectedDate.getDay() === 0) {
-      alert("We're closed on Sundays. Please select another date.");
-      dateInput.value = '';
-      timeSelect.innerHTML =
-        '<option value="" disabled selected>Select Time</option>';
-    }
-  });
 
   // Load service from URL params
   const params = new URLSearchParams(window.location.search);
@@ -298,21 +287,25 @@
       return;
     }
 
-    const day = new Date(selectedDate).getDay(); // 0 = Sunday, 6 = Saturday
+    // ✅ Use local time to get correct day
+    const [year, month, dayOfMonth] = selectedDate.split('-').map(Number);
+    const day = new Date(year, month - 1, dayOfMonth).getDay(); // 0 = Sunday, 6 = Saturday
 
     let times = [];
 
     if (day === 0) {
-      // Saturday
-      times = allowedTimes.saturday;
-    } else if ([1, 2, 3, 4, 5].includes(day)) {
-      // Monday–Friday
-      times = allowedTimes.weekday;
-    } else {
-      // Sunday should not be reachable because of earlier alert, but handle fallback
+      // Sunday
+      alert("We're closed on Sundays. Please select another date.");
+      dateInput.value = '';
       timeSelect.innerHTML =
         '<option value="" disabled selected>Closed on Sundays</option>';
       return;
+    } else if (day === 6) {
+      // Saturday
+      times = allowedTimes.saturday;
+    } else {
+      // Monday–Friday
+      times = allowedTimes.weekday;
     }
 
     timeSelect.innerHTML =
@@ -397,6 +390,8 @@
     });
   });
 </script>
+
+
 
 
   <!-- Bootstrap Bundle JS -->
