@@ -1,144 +1,300 @@
- <!DOCTYPE html>
-  <html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Contact Us | EnvyLashes</title>
     <link rel="icon" href="img/envyyyy.jpg" type="image/png">
-    <!-- !-- BoxIcons  -->
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-  </head>
-  <body>
-
-    <!-- NavBar -->
-<header>
-  <a href="#" class="logo"><h2>Envy<span>Lashes</h2></a>
-  <!-- Hamburger icon -->
-  <div class="bx" id="menu-icon">&#9776;</div>
-
-  <!-- Sidebar menu (hidden by default) -->
-<nav class="navbar" id="navbar">
-  <div class="nav-dropdown">
-    <a href="index.html" class="home-link">Home</a>
-</div>
-<a href="index.html#reviews">Reviews</a>
-  <a href="mywork.html">My Work</a>
-  <a href="prices.html">Prices</a>
-  <a href="policies.html">Policies</a>
-  <a href="hours.html">Hours</a>
-  <a href="contact.html">Contact</a>
-</nav>
-</header>
-
-
-
-<!-- Contact Us Section -->
-<section class="contact-section" id="contact">
-  <div class="contact-container">
-    <h2>Contact <span>EnvyLashes</span></h2>
-    <p class="subtitle">Have questions or want to book directly? Send us a message below.</p>
-
-    <div class="contact-wrapper">
-      <!-- Contact Form -->
-      <form action="https://formspree.io/f/xnnzbbaw" method="POST" class="contact-form">
-        <input type="text" name="name" placeholder="Full Name" required />
-        <input type="email" name="email" placeholder="Email Address" required />
-        <input type="number" name="number" placeholder="Phone Number" required />
-        <textarea name="message" rows="5" placeholder="Your Message..." required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-
-
-    </div>
-  </div>
-</section>
-
-
-<script>
-  const form = document.querySelector('.contact');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const data = new FormData(form);
-    const action = form.action;
-
-    try {
-      const response = await fetch(action, {
-        method: 'POST',
-        body: data,
-        headers: {
-          'Accept': 'application/json'
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            pink: '#FF6B9D',
+                            light: '#FEF7FB',
+                            dark: '#1a1a1a',
+                        }
+                    }
+                }
+            }
         }
-      });
+    </script>
 
-      if (response.ok) {
-        window.location.href = 'thankyou.html'; // redirect locally
-      } else {
-        alert('Oops! There was a problem submitting your form.');
-      }
-    } catch (error) {
-      alert('Oops! There was a problem submitting your form.');
-    }
-  });
+    <style>
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .form-input:focus { ring: 2px solid #FF6B9D; outline: none; border-color: #FF6B9D; }
+    </style>
+</head>
 
-</script>
+<body class="antialiased text-slate-800 bg-slate-50">
 
+    <header class="bg-white fixed w-full top-0 z-50 glass border-b border-gray-100 transition-all duration-300">
+        <nav class="max-w-7xl mx-auto flex items-center justify-between p-4 lg:px-8">
+            <a href="index.html" class="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tighter shrink-0 hover:opacity-80 transition-opacity">
+                Envy<span class="text-brand-pink">Lashes</span>
+            </a>
 
-<script>
-  const menuIcon = document.getElementById('menu-icon');
-  const navbar = document.getElementById('navbar');
-  menuIcon.addEventListener('click', () => {
-    navbar.classList.toggle('active');
-    menuIcon.classList.toggle('active');
-  });
-</script>
+            <input type="checkbox" id="menu-toggle" class="hidden peer">
 
-<script>
-  // Dropdown toggle for mobile
-  document.querySelectorAll('.dropdown-toggle').forEach(function(toggle) {
-    toggle.addEventListener('click', function(e) {
-      e.preventDefault();
-      const parent = this.parentElement;
-      parent.classList.toggle('open');
-    });
-  });
-</script>
+            <div class="hidden lg:flex items-center space-x-8 text-[15px] font-semibold text-slate-600">
+                <a href="index.html" class="hover:text-brand-pink transition-colors">Home</a>
+                <a href="index.html#reviews" class="hover:text-brand-pink transition-colors">Reviews</a>
+                <a href="mywork.html" class="hover:text-brand-pink transition-colors">My Work</a>
+                <a href="policies.html" class="hover:text-brand-pink transition-colors">Policies & Hours</a>
+                <a href="contact.html" class="text-brand-pink">Contact us</a>
+                <a href="prices.html" class="px-5 py-2.5 bg-brand-pink text-white rounded-xl hover:bg-pink-500 transition-all shadow-lg shadow-pink-200">Book Now</a>
+            </div>
 
+            <label for="menu-toggle" class="lg:hidden cursor-pointer p-2 text-slate-900 hover:bg-white rounded-xl transition-colors">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </label>
 
-<!-- FontAwesome Icons (Insert in <head>) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+            <div class="fixed inset-x-0 top-[73px] bg-white border-b border-slate-100 shadow-xl p-6 transition-all duration-300 origin-top transform scale-y-0 opacity-0 peer-checked:scale-y-100 peer-checked:opacity-100 lg:hidden z-40">
+                <ul class="flex flex-col space-y-4 text-lg font-bold text-slate-800">
+                    <li><a href="index.html" class="block hover:text-brand-pink">Home</a></li>
+                    <li><a href="index.html#reviews" class="block hover:text-brand-pink">Reviews</a></li>
+                    <li><a href="mywork.html" class="block hover:text-brand-pink">My Work</a></li>
+                    <li><a href="policies.html" class="hover:text-brand-pink transition-colors">Policies &  Hours</a></li>
+                    <li><a href="contact.html" class="text-brand-pink block">Contact us</a></li>
+                    <li><a href="prices.html" class="sm:pl-10 px-5 py-2 bg-brand-pink text-white rounded-xl hover:bg-pink-500 transition-all shadow-lg shadow-pink-200">Book Now</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
+    <section class="pt-32 pb-20 px-4 md:px-8 max-w-7xl mx-auto min-h-screen flex flex-col justify-center">
+        
+        <section class="pt-8 pb-12 md:pt-8 md:pb-16 px-4 text-center">
+        <span class="inline-block mb-4 text-xs md:text-sm font-bold uppercase tracking-[0.2em] text-brand-pink bg-pink-50 px-3 py-1 rounded-full border border-pink-100">
+            Get in touch
+        </span>
+        <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-6">
+            Let's Chat <span class="text-brand-pink">Lashes</span>
+        </h1>
+        <p class="text-slate-500 max-w-2xl mx-auto text-lg">
+            Have a questions about a style or need to reschedule? Drop a message below or reach out directly.
+        </p>
+    </section>
 
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+            
+            <div class="space-y-8 order-2 lg:order-1">
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl shadow-pink-100/50 border border-slate-50">
+                    <h3 class="text-2xl font-bold mb-6">Contact Info</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center text-brand-pink shrink-0">
+                                <i class='bx bx-phone text-2xl'></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Phone</p>
+                                <a href="tel:17743299197" class="text-lg font-semibold hover:text-brand-pink transition-colors">+1 774 329-9197</a>
+                                <p class="text-sm text-slate-400 mt-1">Text preferred for faster response</p>
+                            </div>
+                        </div>
 
-<!-- Create a footer -->
-    <footer class="footer">
-  <div class="footer-container">
-    <div class="footer-brand">
-      <h2>Envy<span>Lashes</span></h2>
-      <p>Where beauty meets precision. Your confidence is our priority.</p>
-    </div>
-    <div class="footer-links">
-      <h3>Quick Links</h3>
-       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="prices.html">Services</a></li>
-        <li><a href="index.html#aboutme">About Me</a></li>
-        <li><a href="index.html#reviews">Reviews</a></li>
-      </ul>
-    </div>
-    <div class="footer-contact">
-      <h3>Contact</h3>
-      <p>Email: <a href="https://mail.google.com/mail/u/1/#inbox?compose=DmwnWtDmBVcKRgGHxHHTphHsjMbGqdLLSTvQhlwxSVmBpFXkFjLpnrfwfkxtnlRfmmhDjTsZjQwL" target="_blank">@eenvylashes@gmail.com </a> </p>
-      <p>Phone: +1 774 329-9197</p>
-      <div class="footer-socials">
-        <a href="https://www.instagram.com/eenvylashes/"><i class='bx bxl-instagram'></i></a>
-        <a href="#"><i class='bx bxl-facebook'></i></a>
-        <a href="#"><i class='bx bxl-tiktok'></i></a>
-      </div>
-    </div>
-  </div>
-  </body>
-  </html>
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center text-brand-pink shrink-0">
+                                <i class='bx bx-envelope text-2xl'></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Email</p>
+                                <a href="mailto:eenvylashes@gmail.com" class="text-lg font-semibold hover:text-brand-pink transition-colors">eenvylashes@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-full bg-pink-50 flex items-center justify-center text-brand-pink shrink-0">
+                                <i class='bx bxl-instagram text-2xl'></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1">Follow Me</p>
+                                <a href="https://www.instagram.com/eenvylashes/" target="_blank" class="text-lg font-semibold hover:text-brand-pink transition-colors">@eenvylashes</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-brand-light p-8 rounded-[2rem] border border-pink-100">
+                    <h4 class="font-bold text-lg mb-2 text-brand-pink"><i class='bx bx-info-circle'></i> Quick Note</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Please allow up to 24 hours for a response. If your inquiry is regarding an appointment within 24 hours, please text strictly.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 order-1 lg:order-2">
+                <h3 class="text-2xl font-bold mb-6">Send a Message</h3>
+                
+                <form action="https://formspree.io/f/xnnzbbaw" method="POST" class="contact-form space-y-5">
+                    
+                    <div class="space-y-1">
+                        <label class="text-sm font-semibold text-slate-700 ml-1">Full Name</label>
+                        <div class="relative">
+                            <i class='bx bx-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl'></i>
+                            <input type="text" name="name" placeholder="Jane Doe" required 
+                                class="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink transition-all outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="space-y-1">
+                            <label class="text-sm font-semibold text-slate-700 ml-1">Email</label>
+                            <div class="relative">
+                                <i class='bx bx-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl'></i>
+                                <input type="email" name="email" placeholder="jane@example.com" required 
+                                    class="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink transition-all outline-none">
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-sm font-semibold text-slate-700 ml-1">Phone</label>
+                            <div class="relative">
+                                <i class='bx bx-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xl'></i>
+                                <input type="number" name="number" placeholder="(555) 000-0000" required 
+                                    class="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink transition-all outline-none">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1">
+                        <label class="text-sm font-semibold text-slate-700 ml-1">Message</label>
+                        <textarea name="message" rows="4" placeholder="How can I help you?" required 
+                            class="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:bg-white focus:ring-2 focus:ring-brand-pink/20 focus:border-brand-pink transition-all outline-none resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" 
+                        class="w-full py-4 bg-brand-pink text-white font-bold rounded-2xl shadow-lg shadow-pink-200 hover:bg-pink-500 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-2">
+                        <span>Send Message</span>
+                        <i class='bx bx-paper-plane'></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-brand-light pt-20 pb-10 border-t border-pink-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16">
+                
+                <div class="space-y-6">
+                    <a href="#" class="inline-block">
+                        <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+                            Envy<span class="text-brand-pink">Lashes</span>
+                        </h2>
+                    </a>
+                    <p class="text-slate-600 leading-relaxed max-w-sm">
+                        Where beauty meets precision. Your confidence is our priority. We are dedicated to providing the highest quality lash services tailored just for you.
+                    </p>
+                </div>
+
+                <div class="lg:pl-12">
+                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6">
+                        Quick Links
+                    </h3>
+                    <ul class="space-y-4">
+                        <li><a href="index.html" class="text-slate-600 hover:text-brand-pink hover:translate-x-1 transition-all duration-300 flex items-center gap-2">Home</a></li>
+                        <li><a href="mywork.html" class="text-slate-600 hover:text-brand-pink hover:translate-x-1 transition-all duration-300 flex items-center gap-2">My Work</a></li>
+                        <li><a href="policies.html" class="text-slate-600 hover:text-brand-pink hover:translate-x-1 transition-all duration-300 flex items-center gap-2">Policies</a></li>
+                        <li><a href="contact.html" class="text-slate-600 hover:text-brand-pink hover:translate-x-1 transition-all duration-300 flex items-center gap-2">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-6">
+                        Contact Us
+                    </h3>
+                    <ul class="space-y-4 text-slate-600">
+                        <li class="flex items-start gap-3 group">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-pink shadow-sm group-hover:bg-brand-pink group-hover:text-white transition-colors">
+                                <i class='bx bx-envelope text-xl'></i>
+                            </div>
+                            <div class="pt-2">
+                                <a href="mailto:eenvylashes@gmail.com" class="hover:text-brand-pink transition-colors">eenvylashes@gmail.com</a>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 group">
+                            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-brand-pink shadow-sm group-hover:bg-brand-pink group-hover:text-white transition-colors">
+                                <i class='bx bx-phone text-xl'></i>
+                            </div>
+                            <div class="pt-2">
+                                <a href="tel:+17743299197" class="hover:text-brand-pink transition-colors">+1 774 329-9197</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="mt-8 flex space-x-4">
+                        <a href="https://www.instagram.com/eenvylashes/" class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-brand-pink shadow-sm hover:bg-brand-pink hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class='bx bxl-instagram text-xl'></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-brand-pink shadow-sm hover:bg-brand-pink hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class='bx bxl-facebook text-xl'></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-brand-pink shadow-sm hover:bg-brand-pink hover:text-white transition-all duration-300 transform hover:-translate-y-1">
+                            <i class='bx bxl-tiktok text-xl'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-rose-200 flex flex-col md:flex-row justify-between items-center text-sm text-slate-500">
+                <p>&copy; 2024 EnvyLashes. All rights reserved.</p>
+            </div>
+            
+        </div>
+    </footer>
+
+    <script>
+        const form = document.querySelector('.contact-form'); // Fixed selector
+
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const btn = form.querySelector('button');
+                const originalText = btn.innerHTML;
+                
+                // Show loading state
+                btn.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Sending...';
+                btn.disabled = true;
+
+                const data = new FormData(form);
+                const action = form.action;
+
+                try {
+                    const response = await fetch(action, {
+                        method: 'POST',
+                        body: data,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        window.location.href = 'thankyou.html'; 
+                    } else {
+                        alert('Oops! There was a problem submitting your form.');
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                    }
+                } catch (error) {
+                    alert('Oops! There was a problem submitting your form.');
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
