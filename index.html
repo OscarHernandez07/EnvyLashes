@@ -7,7 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+    <script src="https://unpkg.com/feather-icons"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+
     <script>
         tailwind.config = {
             theme: {
@@ -70,32 +73,74 @@
 <!-- Ultra Pink Animated Hero -->
 
 <!-- Ultra Pink Animated Hero -->
+<style>
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
 
-<section class="relative min-h-screen flex items-center justify-center bg-[#FFB3CF] overflow-hidden font-['Poppins'] text-center text-white">
+/* Standard Float Animation (for Hearts & Stars) */
+@keyframes floatAcross {
+    0% { transform: translateX(0) translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    50% { transform: translateX(120vw) translateY(-60px) rotate(180deg); }
+    100% { transform: translateX(200vw) translateY(60px) rotate(360deg); opacity: 0; }
+}
 
-    <!-- Floating Animation Layer -->
+/* Flutter Animation (for Butterflies) */
+@keyframes flutterAcross {
+    0% { transform: translateX(0) translateY(0) rotate(-15deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    25% { transform: translateX(50vw) translateY(-80px) rotate(15deg); }
+    50% { transform: translateX(100vw) translateY(30px) rotate(-10deg); }
+    75% { transform: translateX(150vw) translateY(-50px) rotate(20deg); }
+    100% { transform: translateX(200vw) translateY(20px) rotate(-15deg); opacity: 0; }
+}
+
+/* Glow Pink + Position */
+.glow-pink {
+    color: #FF6B9D;
+    filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.7));
+    position: absolute;
+}
+
+/* Floating animations */
+.floating-item { animation: floatAcross 20s linear infinite; }
+.floating-butterfly { animation: flutterAcross 24s ease-in-out infinite; }
+
+/* Delays */
+.delay-1 { animation-delay: 2s; }
+.delay-2 { animation-delay: 4s; }
+.delay-3 { animation-delay: 6s; }
+.delay-4 { animation-delay: 8s; }
+.delay-5 { animation-delay: 10s; }
+.delay-6 { animation-delay: 12s; }
+.delay-7 { animation-delay: 14s; }
+.delay-8 { animation-delay: 16s; }
+.delay-9 { animation-delay: 18s; }
+.delay-10 { animation-delay: 20s; }
+
+/* Optional: SVG size */
+.floating-butterfly svg { width: 2rem; height: 2rem; fill: #FF6B9D; filter: drop-shadow(0 0 10px rgba(255,107,157,0.7)); }
+</style>
+</head>
+<body>
+
+<section class="relative min-h-screen flex items-center justify-center bg-[#FFB3CF] overflow-hidden text-center text-white">
+
+    <!-- Floating Layer -->
     <div class="absolute inset-0 pointer-events-none overflow-hidden">
 
-        <!-- Butterflies -->
-        <span class="floating-item text-4xl" style="top:5%; left:-10%;">🦋</span>
-        <span class="floating-item delay-2 text-3xl" style="top:20%; left:-15%;">🦋</span>
-        <span class="floating-item delay-4 text-5xl" style="top:40%; left:-20%;">🦋</span>
-        <span class="floating-item delay-6 text-3xl" style="top:65%; left:-25%;">🦋</span>
-        <span class="floating-item delay-8 text-4xl" style="top:85%; left:-30%;">🦋</span>
+        <!-- Butterflies (Custom SVGs) -->
+         
+        <!-- Hearts (Font Awesome Free) -->
+        <i class="fa-solid fa-heart glow-pink floating-item delay-1 text-3xl" style="top:20%; left:-50%;"></i>
+        <i class="fa-solid fa-heart glow-pink floating-item delay-3 text-4xl" style="top:45%; left:-60%;"></i>
 
-        <!-- Hearts -->
-        <span class="floating-item delay-1 text-3xl" style="top:15%; left:-35%;">♡</span>
-        <span class="floating-item delay-3 text-4xl" style="top:35%; left:-40%;">♥</span>
-        <span class="floating-item delay-5 text-2xl" style="top:55%; left:-45%;">♡</span>
-        <span class="floating-item delay-7 text-4xl" style="top:75%; left:-50%;">♥</span>
-        <span class="floating-item delay-9 text-3xl" style="top:90%; left:-55%;">♡</span>
-
-        <!-- Stars -->
-        <span class="floating-item delay-2 text-2xl" style="top:10%; left:-60%;">✦</span>
-        <span class="floating-item delay-4 text-3xl" style="top:30%; left:-65%;">✧</span>
-        <span class="floating-item delay-6 text-2xl" style="top:50%; left:-70%;">✦</span>
-        <span class="floating-item delay-8 text-3xl" style="top:70%; left:-75%;">✧</span>
-        <span class="floating-item delay-10 text-2xl" style="top:85%; left:-80%;">✦</span>
+        <!-- Stars (Font Awesome Free) -->
+        <i class="fa-solid fa-star glow-pink floating-item delay-2 text-2xl" style="top:10%; left:-60%;"></i>
+        <i class="fa-solid fa-star glow-pink floating-item delay-4 text-3xl" style="top:30%; left:-65%;"></i>
 
     </div>
 
@@ -107,60 +152,24 @@
             <span class="block text-pink-900">Effortlessly Cute</span>
         </h1>
 
-        <p class="text-lg md:text-xl text-black-100 mb-10 max-w-xl mx-auto leading-relaxed">
-            Confidence in  Every Blink Natural & Bold
+        <p class="text-lg md:text-xl text-pink-900/80 mb-10 max-w-xl mx-auto leading-relaxed font-medium">
+            Confidence in Every Blink • Natural & Bold
         </p>
 
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="prices.html" 
-               class="px-8 py-4 bg-white text-[#FF6B9D] font-bold rounded-full hover:scale-110 transition shadow-2xl">
-                Book Now 💖
+               class="px-8 py-4 bg-white text-[#FF6B9D] font-bold rounded-full hover:scale-105 transition-all shadow-xl flex items-center justify-center gap-3">
+               Book Now <i class="fa-solid fa-calendar-check"></i>
             </a>
 
             <a href="mywork.html" 
-               class="px-8 py-4 bg-pink-600 text-white font-bold rounded-full hover:bg-pink-700 transition shadow-xl">
-                View Gallery ✨
+               class="px-8 py-4 bg-pink-600 text-white font-bold rounded-full hover:bg-pink-700 hover:scale-105 transition-all shadow-xl flex items-center justify-center gap-3">
+               View Gallery <i class="fa-solid fa-images"></i>
             </a>
         </div>
-
     </div>
 
 </section>
-
-<style>
-@keyframes floatAcross {
-    0% {
-        transform: translateX(0) translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% { opacity: 1; }
-    50% {
-        transform: translateX(120vw) translateY(-60px) rotate(180deg);
-    }
-    100% {
-        transform: translateX(200vw) translateY(60px) rotate(360deg);
-        opacity: 0;
-    }
-}
-
-.floating-item {
-    position: absolute;
-    animation: floatAcross 20s linear infinite;
-    color: rgba(255,255,255,0.85);
-}
-
-/* Stagger delays */
-.delay-1 { animation-delay: 2s; }
-.delay-2 { animation-delay: 4s; }
-.delay-3 { animation-delay: 6s; }
-.delay-4 { animation-delay: 8s; }
-.delay-5 { animation-delay: 10s; }
-.delay-6 { animation-delay: 12s; }
-.delay-7 { animation-delay: 14s; }
-.delay-8 { animation-delay: 16s; }
-.delay-9 { animation-delay: 18s; }
-.delay-10 { animation-delay: 20s; }
-</style>
 
 
     <!-- Create the aboot me section  -->
